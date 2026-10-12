@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Suryansh Plays Piano | Piano & Sheet Music</title>
+
+  <meta
+    name="description"
+    content="Suryansh Plays Piano — Explore piano performances and discover sheet music."
+  >
+
+  <style>
+    /* =========================
+       GLOBAL
+    ========================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #080808;
+      --bg2: #111111;
+      --card: #151515;
+      --gold: #d4af37;
+      --gold-light: #f1d878;
+      --white: #ffffff;
+      --muted: #aaaaaa;
+      --border: rgba(255,255,255,0.1);
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1150px, 90%);
+      margin: auto;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(8,8,8,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #ddd;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, #29200b 0%, #080808 55%);
+    }
+
+    .hero-content {
+      width: 100%;
+      animation: fadeUp 1.2s ease;
+    }
+
+    .piano-icon {
+      font-size: 70px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 82px);
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .hero-buttons {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+      display: inline-block;
+      cursor: pointer;
+      border: 1px solid var(--gold);
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      color: var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: var(--gold);
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    /* Piano keys */
+
+    .piano {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      display: flex;
+      opacity: 0.15;
+    }
+
+    .white-key {
+      flex: 1;
+      background: white;
+      border: 1px solid #111;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================== */
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .section-title h2 span {
+      color: var(--gold);
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    /* =========================
+       SHEET MUSIC
+    ========================== */
+
+    .search-box {
+      max-width: 550px;
+      margin: 0 auto 35px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: #111;
+      color: white;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .search-box input:focus {
+      border-color: var(--gold);
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: #ccc;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--gold);
+      color: black;
+    }
+
+    .sheet-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .sheet-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .sheet-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(212,175,55,0.6);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+    }
+
+    .sheet-image {
+      height: 200px;
+      background:
+        linear-gradient(135deg, #252525, #0d0d0d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .sheet-info {
+      padding: 22px;
+    }
+
+    .sheet-info h3 {
+      margin-bottom: 8px;
+    }
+
+    .sheet-info p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .sheet-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .small-btn {
+      padding: 9px 15px;
+      border-radius: 20px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 13px;
+    }
+
+    .small-btn:hover {
+      background: var(--gold);
+      color: #000;
+    }
+
+    /* =========================
+       YOUTUBE
+    ========================== */
+
+    .youtube-section {
+      background: var(--bg2);
+    }
+
+    .youtube-box {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .youtube-placeholder {
+      aspect-ratio: 16 / 9;
+      background: #050505;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .youtube-icon {
+      font-size: 70px;
+    }
+
+    /* =========================
+       ABOUT
+    ========================== */
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-image {
+      height: 400px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle, #4a3b13, #101010 60%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 100px;
+    }
+
+    .about-text h2 {
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    .about-text h2 span {
+      color: var(--gold);
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    /* =========================
+       CONTACT
+    ========================== */
+
+    .contact-box {
+      max-width: 650px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      padding: 35px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+    }
+
+    footer span {
+      color: var(--gold);
+    }
+
+    /* =========================
+       ANIMATION
+    ========================== */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 850px) {
+
+      .sheet-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image {
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        background: #090909;
+        flex-direction: column;
+        text-align: center;
+        padding: 25px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .sheet-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .section-title h2 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <nav>
+    <div class="container nav-container">
+
+      <a href="#home" class="logo">
+        SURYANSH <span>PLAYS PIANO</span>
+      </a>
+
+      <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#sheet-music">Sheet Music</a></li>
+        <li><a href="#youtube">YouTube</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+    </div>
+  </nav>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero" id="home">
+
+    <div class="container hero-content">
+
+      <div class="piano-icon">🎹</div>
+
+      <h1>
+        SURYANSH <span>PLAYS PIANO</span>
+      </h1>
+
+      <p>
+        Explore beautiful piano performances and discover sheet music
+        to play your favorite pieces yourself.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#sheet-music" class="btn btn-primary">
+          🎼 Browse Sheet Music
+        </a>
+
+        <a
+          href="https://www.youtube.com/@suryanshplayspiano"
+          target="_blank"
+          class="btn btn-outline"
+        >
+          ▶ Watch on YouTube
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="piano">
+
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+      <div class="white-key"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SHEET MUSIC
+  ========================== -->
+
+  <section id="sheet-music">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>Sheet <span>Music</span></h2>
+
+        <p>
+          Find and download your favorite piano scores.
+        </p>
+
+      </div>
+
+
+      <div class="search-box">
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search sheet music..."
+          onkeyup="searchSheets()"
+        >
+
+      </div>
+
+
+      <div class="filters">
+
+        <button
+          class="filter-btn active"
+          onclick="filterSheets('all', this)"
+        >
+          All
+        </button>
+
+        <button
+          class="filter-btn"
+          onclick="filterSheets('beginner', this)"
+        >
+          Beginner
+        </button>
+
+        <button
+          class="filter-btn"
+          onclick="filterSheets('intermediate', this)"
+        >
+          Intermediate
+        </button>
+
+        <button
+          class="filter-btn"
+          onclick="filterSheets('advanced', this)"
+        >
+          Advanced
+        </button>
+
+      </div>
+
+
+      <div class="sheet-grid" id="sheetGrid">
+
+
+        <!-- PIECE 1 -->
+
+        <div
+          class="sheet-card"
+          data-level="beginner"
+          data-name="Piece One"
+        >
+
+          <div class="sheet-image">
+            🎼
+          </div>
+
+          <div class="sheet-info">
+
+            <h3>Piece One</h3>
+
+            <p>
+              Beginner • Piano Sheet Music
+            </p>
+
+            <div class="sheet-buttons">
+
+              <!-- CHANGE THIS PDF PATH -->
+
+              <a
+                href="scores/piece-one.pdf"
+                target="_blank"
+                class="small-btn"
+              >
+                📄 Preview
+              </a>
+
+              <a
+                href="scores/piece-one.pdf"
+                download
+                class="small-btn"
+              >
+                ↓ Download
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PIECE 2 -->
+
+        <div
+          class="sheet-card"
+          data-level="intermediate"
+          data-name="Piece Two"
+        >
+
+          <div class="sheet-image">
+            🎹
+          </div>
+
+          <div class="sheet-info">
+
+            <h3>Piece Two</h3>
+
+            <p>
+              Intermediate • Piano Sheet Music
+            </p>
+
+            <div class="sheet-buttons">
+
+              <a
+                href="scores/piece-two.pdf"
+                target="_blank"
+                class="small-btn"
+              >
+                📄 Preview
+              </a>
+
+              <a
+                href="scores/piece-two.pdf"
+                download
+                class="small-btn"
+              >
+                ↓ Download
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PIECE 3 -->
+
+        <div
+          class="sheet-card"
+          data-level="advanced"
+          data-name="Piece Three"
+        >
+
+          <div class="sheet-image">
+            🎵
+          </div>
+
+          <div class="sheet-info">
+
+            <h3>Piece Three</h3>
+
+            <p>
+              Advanced • Piano Sheet Music
+            </p>
+
+            <div class="sheet-buttons">
+
+              <a
+                href="scores/piece-three.pdf"
+                target="_blank"
+                class="small-btn"
+              >
+                📄 Preview
+              </a>
+
+              <a
+                href="scores/piece-three.pdf"
+                download
+                class="small-btn"
+              >
+                ↓ Download
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       YOUTUBE
+  ========================== -->
+
+  <section class="youtube-section" id="youtube">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>My <span>YouTube</span></h2>
+
+        <p>
+          Watch my latest piano performances.
+        </p>
+
+      </div>
+
+
+      <div class="youtube-box">
+
+        <div class="youtube-placeholder">
+
+          <div class="youtube-icon">
+            ▶️
+          </div>
+
+          <h3>Suryansh Plays Piano</h3>
+
+          <p>
+            Piano performances, covers and music.
+          </p>
+
+          <a
+            href="https://www.youtube.com/@suryanshplayspiano"
+            target="_blank"
+            class="btn btn-primary"
+          >
+            Visit YouTube Channel
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ABOUT
+  ========================== -->
+
+  <section id="about">
+
+    <div class="container about">
+
+      <div class="about-image">
+        🎹
+      </div>
+
+      <div class="about-text">
+
+        <h2>
+          About <span>Suryansh</span>
+        </h2>
+
+        <p>
+          Welcome to Suryansh Plays Piano — a place for piano
+          performances and sheet music.
+        </p>
+
+        <p>
+          Explore performances, discover sheet music and enjoy
+          the world of piano music.
+        </p>
+
+        <a
+          href="https://www.youtube.com/@suryanshplayspiano"
+          target="_blank"
+          class="btn btn-outline"
+        >
+          Visit My Channel
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACT
+  ========================== -->
+
+  <section id="contact">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>Get In <span>Touch</span></h2>
+
+        <p>
+          Have a sheet-music request or a question?
+        </p>
+
+      </div>
+
+
+      <div class="contact-box">
+
+        <!-- CHANGE THE EMAIL BELOW -->
+
+        <p>
+          For questions, requests or collaborations,
+          feel free to get in touch.
+        </p>
+
+        <a
+          href="mailto:YOUR-EMAIL@example.com"
+          class="btn btn-primary"
+        >
+          ✉ Contact Me
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container">
+
+      © <span id="year"></span>
+      Suryansh Plays Piano.
+      All rights reserved.
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /* Mobile menu */
+
+    function toggleMenu() {
+
+      document
+        .getElementById("navLinks")
+        .classList
+        .toggle("show");
+
+    }
+
+
+    /* Search */
+
+    function searchSheets() {
+
+      const search =
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase();
+
+      const cards =
+        document.querySelectorAll(".sheet-card");
+
+      cards.forEach(card => {
+
+        const name =
+          card
+            .dataset
+            .name
+            .toLowerCase();
+
+        card.style.display =
+          name.includes(search)
+            ? "block"
+            : "none";
+
+      });
+
+    }
+
+
+    /* Difficulty filter */
+
+    function filterSheets(level, button) {
+
+      const cards =
+        document.querySelectorAll(".sheet-card");
+
+      const buttons =
+        document.querySelectorAll(".filter-btn");
+
+      buttons.forEach(btn => {
+
+        btn.classList.remove("active");
+
+      });
+
+      button.classList.add("active");
+
+
+      cards.forEach(card => {
+
+        if (
+          level === "all" ||
+          card.dataset.level === level
+        ) {
+
+          card.style.display = "block";
+
+        } else {
+
+          card.style.display = "none";
+
+        }
+
+      });
+
+    }
+
+
+    /* Footer year */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+  </script>
+
+</body>
+</html>
